@@ -2,7 +2,11 @@ import {CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Alert, ImageBackground, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { ButtonComponent } from '../components/ButtonComponent';
-export const HomeScreen = () => {
+import { StackScreenProps } from '@react-navigation/stack';
+
+interface Props extends StackScreenProps<any,any>{};
+
+export const HomeScreen = ({navigation}:Props) => {
   const imagen = { uri: 'https://res.cloudinary.com/dkd6jfzee/image/upload/v1707105837/ATENCION_js06mj.png' };
   const [usuario, setUsuario] = useState('')
   const [password, setPassword] = useState('');
@@ -25,8 +29,8 @@ export const HomeScreen = () => {
               value={password}
             />
           </SafeAreaView>
-          <ButtonComponent title='INICIAR SESIÓN' onPress={() => Alert.alert('AÚN NO FUNCIONO')}/>
-          <ButtonComponent title='REGÍSTRATE' onPress={() => Alert.alert('AÚN NO FUNCIONO')}/>
+          <ButtonComponent title='INICIAR SESIÓN' onPress={()=>navigation.navigate('Búsqueda')}/>
+          <ButtonComponent title='REGISTRARME' onPress={()=>navigation.navigate('RegistroScreen')}/>
         </View>
       </ImageBackground>
     </View>

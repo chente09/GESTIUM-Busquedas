@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { ButtonComponent } from '../components/ButtonComponent';
+import { LogoComponent } from '../components/LogoComponent';
 
 export const InterfazBusquedaScreen = () => {
     const [name, setName] = useState('');
@@ -11,12 +12,7 @@ export const InterfazBusquedaScreen = () => {
     return (
         <View style={{flex:1, backgroundColor:'white'}}>
             <View style={styles.container2}>
-                <Image
-                    style={styles.tinyLogo}
-                    source={{
-                        uri: 'https://res.cloudinary.com/dkd6jfzee/image/upload/v1707113175/Dise%C3%B1o_sin_t%C3%ADtulo_cxxwog.png',
-                    }}
-                />
+                <LogoComponent/>
                 <Text style={styles.title}>
                     GESTIUM Servicios Legales Integrales
                     - CONSULTA DE PROCESOS JUDICIALES ELECTRÓNICOS
@@ -77,11 +73,6 @@ const styles = StyleSheet.create({
     container3: {
         justifyContent: 'center',
         marginHorizontal: 10
-    },
-    tinyLogo: {
-        width: 150,
-        height: 150,
-        borderRadius: 100,
     },
     title: {
         top: '5%',
