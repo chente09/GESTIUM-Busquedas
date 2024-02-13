@@ -2,6 +2,20 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Alert, Button, ImageBackground, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { ButtonComponent } from '../components/ButtonComponent';
+import { InputComponent } from '../commons/InputComponent';
+
+interface UsetForm {
+  name: string,
+  lastName:string,
+  id:number,
+  cellphone:number,
+  address:string,
+  email:string,
+  username:string,
+  password: string,
+  confirmPass:string,
+  hasError: boolean;
+}
 
 export default function RegistroScreen() {
   const imagen = { uri: 'https://res.cloudinary.com/dkd6jfzee/image/upload/v1707109241/LOGO2_h3bkqu.png' };
@@ -15,67 +29,87 @@ export default function RegistroScreen() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
+  //Gestionar los datos de mi formulario
+  const [form, setForm] = useState<UsetForm>({
+    name:'',
+    lastName:'',
+    id:0,
+    cellphone:0,
+    address:'',
+    email:'',
+    username: '',
+    password: '',
+    confirmPass:'',
+    hasError: false
+  });
+
+  //Hook qu epermite cambiar el input pasword
+
+  const [hiddenPassword, sethiddenPassword] = useState(true)
+
+  //Funcion que cambiara los valores del formulario
+
+  const handlerChangeText = (name: string, value: string) => {
+    // console.log(name); //clave - propied
+    // console.log(value); /// valor de clave
+    setForm(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
   return (
     <View style={styles.container}>
     <ImageBackground source={imagen} resizeMode="cover" style={styles.image}>
       <View style={styles.container2}>
         <SafeAreaView>
-          <TextInput
-            style={styles.input}
-            onChangeText={setName}
-            placeholder="¿Cómo te llamas?"
-            value={name}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setApellidos}
-            placeholder="¿Cuáles son tus apellidos?"
-            value={apellidos}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setCedula}
-            placeholder="Ingresa tu número de cédula"
-            value={cedula}
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setCelular}
-            placeholder="Ingresa tu número de celular"
-            value={celular}
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setDireccion}
-            placeholder="Ingresa tu dirección"
-            value={direccion}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setEmail}
-            placeholder="Ingresa tu correo electrónico"
-            value={email}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setUsuario}
-            placeholder="Crea un nombre de usuario"
-            value={usuario}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setPassword}
-            placeholder="Crea una contraseña"
-            value={password}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={setPasswordConfirm}
-            placeholder="Confirma la contraseña"
-            value={passwordConfirm}
-          />
+          <InputComponent
+              placeholder='¿Cómo te llamas?'
+              name='name'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError} />
+          <InputComponent
+              placeholder='¿Cuáles son tus apellidos?'
+              name='lastName'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError}/>
+          <InputComponent
+              placeholder='Ingresa tu número de cédula'
+              name='id'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError}/>
+          <InputComponent
+              placeholder='Ingresa tu número de celular'
+              name='cellphone'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError}/>
+          <InputComponent
+              placeholder='Ingresa tu dirección'
+              name='address'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError}/>
+          <InputComponent
+              placeholder='Ingresa tu correo electrónico'
+              name='email'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError}/>
+          <InputComponent
+              placeholder='Crea un nombre de usuario'
+              name='username'
+              onChangeText={handlerChangeText}
+              hasError={form.hasError}/>
+          <InputComponent
+              placeholder='Crea una contraseña'
+              name='password'
+              onChangeText={handlerChangeText}
+              isPassword={hiddenPassword}
+              hasError={form.hasError} />
+          <InputComponent
+              placeholder='Confirma la contraseña'
+              name='confirmPass'
+              onChangeText={handlerChangeText}
+              isPassword={hiddenPassword}
+              hasError={form.hasError} />
         </SafeAreaView>
         <ButtonComponent title='REGÍSTRATE' onPress={() => Alert.alert('AÚN NO FUNCIONO')}/>
       </View>
@@ -98,14 +132,6 @@ const styles = StyleSheet.create({
     image: {
       flex: 1,
       height:800  
-    },
-    text: {
-      color: 'white',
-      fontSize: 42,
-      lineHeight: 84,
-      fontWeight: 'bold',
-      textAlign: 'center',
-      backgroundColor: '#000000c0',
     },
     input: {
       backgroundColor: 'white',
