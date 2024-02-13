@@ -16,7 +16,7 @@ export const StackNavigator=()=> {
         }
     }}>
       <Stack.Screen name="HomeScreen" options={{headerShown:false}} component={HomeScreen} />
-      <Stack.Screen name="RegistroScreen"  component={RegistroScreen} />
+      <Stack.Screen name="Registro"  component={RegistroScreen} />
       <Stack.Screen name="Búsqueda" options={{headerShown:false}} component={DrawerNavigator} />
     </Stack.Navigator>
   );

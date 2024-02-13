@@ -30,7 +30,7 @@ export const HomeScreen = ({navigation}:Props) => {
             />
           </SafeAreaView>
           <ButtonComponent title='INICIAR SESIÓN' onPress={()=>navigation.navigate('Búsqueda')}/>
-          <ButtonComponent title='REGISTRARME' onPress={()=>navigation.navigate('RegistroScreen')}/>
+          <ButtonComponent title='REGISTRARME' onPress={()=>navigation.navigate('Registro')}/>
         </View>
       </ImageBackground>
     </View>
