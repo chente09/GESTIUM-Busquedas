@@ -2,6 +2,7 @@ import React from 'react'
 import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import { ButtonComponent } from '../components/ButtonComponent';
 import { LogoComponent } from '../components/LogoComponent';
+import { User } from './navigator/StackNavigator';
 
 export const ProfileScreen = () => {
     return (
@@ -9,7 +10,7 @@ export const ProfileScreen = () => {
             <View>
                 <View style={styles.contImg}>
                     <LogoComponent/>
-                    <Text>Nombre Usuario</Text>
+                    <Text>User: {}</Text>
                     <Text>Ci:000000000</Text>
                 </View>
                 <ButtonComponent title='TOMAR UNA FOTO' onPress={() => Alert.alert('AÚN NO FUNCIONO')} />

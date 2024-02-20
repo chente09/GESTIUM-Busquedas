@@ -1,26 +1,36 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import { ERRor_COLOR, INPUT_COLOR } from './constantsColor'
+import { ERRor_COLOR, PRIMARY_COLOR } from './constantsColor'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { KeyboardTypeOptions } from 'react-native';
 
 interface InputProps {
   placeholder: string;
+  keyboardType?: KeyboardTypeOptions;
   name: string;
   onChangeText: (name: string, value: string) => void;
   isPassword?: boolean;
+  hasIcon?:boolean;
+  accionIcon?:()=>void;
   hasError: boolean;
 }
 
-export const InputComponent = ({ placeholder, name, onChangeText, isPassword = false, hasError }: InputProps) => {
+export const InputComponent = ({ placeholder, keyboardType = 'default', name, onChangeText, isPassword = false, hasIcon=false, accionIcon=()=>{}, hasError }: InputProps) => {
   return (
     <View>
       <TextInput
         placeholder={placeholder}
-        keyboardType='default'
+        keyboardType={keyboardType}
         style={(hasError)
           ? { ...styles.inputText, ...styles.error }
           : { ...styles.inputText }}
         onChangeText={(value: string) => onChangeText(name, value)}
         secureTextEntry={isPassword} />
+      { (hasIcon)
+      ?<Icon style={styles.icon} name='visibility' size={20}
+        color={PRIMARY_COLOR} onPress={accionIcon}/>
+        :null
+      }
       {
         (hasError)
           ? <Text style={styles.errorText}>El Campo es obligatorio</Text>
@@ -51,6 +61,11 @@ const styles = StyleSheet.create({
     color:ERRor_COLOR,
     fontSize: 14,
     fontWeight: 'bold'
-  }
+  },
+  icon: {
+    position: 'absolute',
+    right: 20,
+    marginTop: 20,
+  },
 
 })
